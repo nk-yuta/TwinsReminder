@@ -26,7 +26,23 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account:top' %}">Top</a>
           </li>
+          {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account:login' %}">Log in</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account:logout' %}">Log out</a>
+            </li>
+          {% endif %}
         </ul>
+      </div>
+      <div class="pl-4 small" style="background-color: #e2e3e5 ; border-bottom: solid 1px #f3f3f3;">
+        {% if not user.is_authenticated %}
+          こんにちは！ ゲスト さん
+        {% else %}
+          こんにちは！ {{ user.username }} さん
+        {% endif %}
       </div>
     </nav>
     <!-- コンテンツ -->

@@ -123,3 +123,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'account:login' # ログインのURLの設定
+LOGIN_REDIRECT_URL = 'account:top' #ログインが完了した後に遷移するURL
