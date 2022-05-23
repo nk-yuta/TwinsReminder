@@ -1,4 +1,5 @@
 from .forms import LoginForm
+from .forms import LoginForm, SignupForm # 追加
 from django.shortcuts import redirect # 追加
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -38,4 +39,24 @@ class MyPage(OnlyYouMixin, generic.DetailView):
     # モデル名小文字(user)でモデルインスタンスがテンプレートファイルに渡される
 
 
+    template_name = 'account/signup_done.html'
+
+# サインアップ
+class Signup(generic.CreateView):
+    template_name = 'account/user_form.html'
+    form_class =SignupForm
+
+    def form_valid(self, form):
+        user = form.save() # formの情報を保存
+        return redirect('account:signup_done')
+
+    # データ送信
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["process_name"] = "Sign up"
+        return context
+
+
+# サインアップ完了
+class SignupDone(generic.TemplateView):
     template_name = 'account/signup_done.html'
