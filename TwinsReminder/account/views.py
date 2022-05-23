@@ -1,10 +1,12 @@
 from .forms import LoginForm
-from .forms import LoginForm, SignupForm # 追加
-from django.shortcuts import redirect # 追加
+from .forms import LoginForm, SignupForm
+from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import get_user_model # 追加
-from django.contrib.auth.mixins import UserPassesTestMixin # 追加
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import UserPassesTestMixin
+from .forms import LoginForm, SignupForm, UserUpdateForm
+from django.shortcuts import redirect, resolve_url
 from django.views import generic
 
 
@@ -39,8 +41,6 @@ class MyPage(OnlyYouMixin, generic.DetailView):
     # モデル名小文字(user)でモデルインスタンスがテンプレートファイルに渡される
 
 
-    template_name = 'account/signup_done.html'
-
 # サインアップ
 class Signup(generic.CreateView):
     template_name = 'account/user_form.html'
@@ -56,7 +56,23 @@ class Signup(generic.CreateView):
         context["process_name"] = "Sign up"
         return context
 
-
 # サインアップ完了
 class SignupDone(generic.TemplateView):
     template_name = 'account/signup_done.html'
+
+# ユーザー登録情報の更新
+class UserUpdate(OnlyYouMixin, generic.UpdateView):
+# ユーザーモデルの取得
+    User = get_user_model()
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'account/user_form.html'
+
+    def get_success_url(self):
+        return resolve_url('account:my_page', pk=self.kwargs['pk'])
+
+    # contextデータ作成
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["process_name"] = "Update"
+        return context
