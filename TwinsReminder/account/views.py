@@ -1,3 +1,4 @@
+from .forms import LoginForm
 from django.shortcuts import redirect # 追加
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -35,3 +36,6 @@ class MyPage(OnlyYouMixin, generic.DetailView):
     model = User
     template_name = 'account/my_page.html'
     # モデル名小文字(user)でモデルインスタンスがテンプレートファイルに渡される
+
+
+    template_name = 'account/signup_done.html'
