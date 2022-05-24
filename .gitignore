@@ -1,0 +1,5 @@
+TwinsReminder/TwinsReminder/__pycache__
+TwinsReminder/show/__pycache__
+TwinsReminder/show/migrations
+*.sqlite3
+/.vscode
