@@ -21,9 +21,5 @@ from django.urls import path, include # 追加
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),  # 追加
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
     path('show/', include('show.urls')),
 ]
