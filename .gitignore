@@ -4,5 +4,6 @@
 *.sqlite3
 TwinsReminder/TwinsReminder/__pycache__
 TwinsReminder/show/__pycache__
+TwinsReminder/account/__pycache__
 TwinsReminder/show/migrations
 /.vscode
