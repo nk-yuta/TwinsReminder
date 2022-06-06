@@ -1,3 +1,5 @@
+import datetime
+from multiprocessing import context
 from .forms import LoginForm
 from .forms import LoginForm, SignupForm
 from django.shortcuts import redirect
@@ -11,11 +13,20 @@ from django.views import generic
 from .forms import LoginForm, SignupForm, UserUpdateForm, MyPasswordChangeForm
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.urls import reverse_lazy # 遅延評価用
+from django.shortcuts import render
+from django.http.response import HttpResponse
 
 
 #トップページ
 class TopView(generic.TemplateView):
     template_name = 'account/top.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        last_login =self.request.user.last_login.strftime('%d')
+        now = datetime.datetime.now().strftime('%d')
+        context['from_lastlogin'] = int(last_login) - int(now)
+        return context
+
 
 # ログイン
 class Login(LoginView):
