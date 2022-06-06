@@ -3,6 +3,11 @@
 <!-- コンテンツ -->
 {% block content %}
 <div class="container">
-  <h1>Top Page!!</h1>
+  <h1>最終ログインから {{ from_lastlogin }} 日過ぎました</h1>
+  <div>
+    {% if from_lastlogin >= 7 %}
+    <h1>そろそろTwinsにログインしませんか？</h1>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
