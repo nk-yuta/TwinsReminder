@@ -5,3 +5,4 @@
 __pycache__/
 TwinsReminder/show/migrations
 /.vscode
+migrations/
