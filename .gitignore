@@ -2,7 +2,7 @@
 *.db
 # すべての.sqlite3ファイルを無視
 *.sqlite3
-TwinsReminder/TwinsReminder/__pycache__
-TwinsReminder/show/__pycache__
+__pycache__/
 TwinsReminder/show/migrations
 /.vscode
+migrations/

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>My page</h1>
+    <hr>
+  
+    <div class="row">
+      <div class="col"><h4>■　通知一覧</h4></div>
+    </div>
+    <table class="table table-bordered">
+      <tbody>
+        {% for notification in notification_list %}
+        <tr>
+          <td>{{ notification.category }}</td>
+          <td>{{ notification.title }}</td>
+          <td>{{ notification.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
