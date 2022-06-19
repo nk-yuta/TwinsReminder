@@ -16,6 +16,7 @@ from django.urls import reverse_lazy # 遅延評価用
 from django.shortcuts import render
 from django.http.response import HttpResponse
 
+from . import models
 
 #トップページ
 class TopView(generic.TemplateView):
@@ -46,6 +47,12 @@ class OnlyYouMixin(UserPassesTestMixin):
         user = self.request.user
         return user.pk == self.kwargs['pk']
 
+class NotificationList(generic.ListView):
+    model = models.User_Notification
+    context_object_name = "notification_list"
+    template_name = "account/my_notification.html"
+
+
 # マイページ
 class MyPage(OnlyYouMixin, generic.DetailView):
     # ユーザーモデルの取得
@@ -58,7 +65,7 @@ class MyPage(OnlyYouMixin, generic.DetailView):
 # サインアップ
 class Signup(generic.CreateView):
     template_name = 'account/user_form.html'
-    form_class =SignupForm
+    form_class = SignupForm
 
     def form_valid(self, form):
         user = form.save() # formの情報を保存
